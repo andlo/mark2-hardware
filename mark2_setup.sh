@@ -77,7 +77,6 @@ sudo chmod 0755 /opt/sj201/*
 echo "Copying SJ201 systemd unit file..."
 cat <<EOF | tee /home/ovos/.config/systemd/user/sj201.service > /dev/null
 [Unit]
-[Unit]
 Documentation=https://github.com/MycroftAI/mark-ii-hardware-testing/blob/main/README.md
 Description=SJ201 microphone initialization
 After=network-online.target
