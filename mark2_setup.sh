@@ -9,7 +9,7 @@ OVOS_HARDWARE_MARK2_VOCALFUSION_BRANCH="main"
 BOOT_DIRECTORY="/boot"
 ANSIBLE_KERNEL=$(uname -r)
 ANSIBLE_PROCESSOR_COUNT=$(nproc)
-VENV_PATH="/home/$USER/ovos_venv"
+VENV_PATH="/home/$USER/.venvs/sj201"
 
 # Update and install necessary packages
 echo "Updating and installing necessary packages..."
