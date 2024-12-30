@@ -42,7 +42,7 @@ done
 # Build vocalfusion-soundcard.ko kernel module
 echo "Building vocalfusion-soundcard.ko kernel module..."
 cd "$OVOS_HARDWARE_MARK2_VOCALFUSION_SRC_PATH/driver"
-make -j "$ANSIBLE_PROCESSOR_COUNT" KDIR="/lib/modules/$ANSIBLE_KERNEL/build"
+make -j "$ANSIBLE_PROCESSOR_COUNT" KDIR="/lib/modules/$ANSIBLE_KERNEL/build" all
 
 # Copy vocalfusion-soundcard.ko to /lib/modules
 echo "Copying vocalfusion-soundcard.ko to /lib/modules..."
