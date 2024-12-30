@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # Variables
 REPO_URL="https://github.com/OpenVoiceOS/VocalFusionDriver.git"
 #SRC_PATH="/home/$USER/VocalFusionDriver"
