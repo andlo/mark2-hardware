@@ -70,9 +70,10 @@ sudo curl -L -o /opt/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin "https://raw.gith
 sudo curl -L -o /opt/sj201/init_tas5806 "https://raw.githubusercontent.com/MycroftAI/mark-ii-hardware-testing/main/utils/init_tas5806.py"
 sudo chmod 0755 /opt/sj201/*
 
-# Copy SJ201 systemd unit file
+ Copy SJ201 systemd unit file
 echo "Copying SJ201 systemd unit file..."
-cat <<EOF | tee /home/ovos/systemd/user/sj201.service > /dev/null
+cat <<EOF | tee /home/ovos/.config/systemd/user/sj201.service > /dev/null
+[Unit]
 [Unit]
 Documentation=https://github.com/MycroftAI/mark-ii-hardware-testing/blob/main/README.md
 Description=SJ201 microphone initialization
@@ -86,6 +87,9 @@ ExecStartPost=%h/.venvs/sj201/bin/python /opt/sj201/init_tas5806
 Restart=on-failure
 RestartSec=5s
 RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
 EOF
 
 # Enable and start SJ201 systemd unit
