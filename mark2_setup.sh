@@ -70,7 +70,7 @@ sudo curl -L -o /opt/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin "https://raw.gith
 sudo curl -L -o /opt/sj201/init_tas5806 "https://raw.githubusercontent.com/MycroftAI/mark-ii-hardware-testing/main/utils/init_tas5806.py"
 sudo chmod 0755 /opt/sj201/*
 
-echo Copy SJ201 systemd unit file
+# Create SJ201 systemd unit file
 echo "Copying SJ201 systemd unit file..."
 cat <<EOF | tee /home/ovos/.config/systemd/user/sj201.service > /dev/null
 [Unit]
@@ -116,3 +116,4 @@ echo "Deleting source path once compiled..."
 sudo rm -rf "$OVOS_HARDWARE_MARK2_VOCALFUSION_SRC_PATH"
 
 echo "Setup for Mark II hardware on Raspbian Bookworm Lite with PipeWire completed."
+
