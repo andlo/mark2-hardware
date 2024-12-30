@@ -48,7 +48,7 @@ make -j "$ANSIBLE_PROCESSOR_COUNT" KDIR="/lib/modules/$ANSIBLE_KERNEL/build" all
 # Copy vocalfusion-soundcard.ko to /lib/modules
 echo "Copying vocalfusion-soundcard.ko to /lib/modules..."
 sudo cp "$OVOS_HARDWARE_MARK2_VOCALFUSION_SRC_PATH/driver/vocalfusion-soundcard.ko" "/lib/modules/$ANSIBLE_KERNEL/vocalfusion-soundcard.ko"
-chmod 0644 "/lib/modules/$ANSIBLE_KERNEL/vocalfusion-soundcard.ko"
+sudo chmod 0644 "/lib/modules/$ANSIBLE_KERNEL/vocalfusion-soundcard.ko"
 sudo depmod
 
 # Create /etc/modules-load.d/vocalfusion.conf file
