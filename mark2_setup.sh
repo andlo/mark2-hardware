@@ -8,13 +8,13 @@ OVOS_HARDWARE_MARK2_VOCALFUSION_SRC_PATH="/home/$USER/VocalFusionDriver"
 OVOS_HARDWARE_MARK2_VOCALFUSION_BRANCH="main"
 BOOT_DIRECTORY="/boot"
 ANSIBLE_KERNEL=$(uname -r)
-ANSIBLE_PROCESSOR_COUNT=$(nproc)
+ANSIBLE_PROCESSOR_COUNT=$(nproc.
 VENV_PATH="/home/$USER/.venvs/sj201"
 
 # Update and install necessary packages
-echo "Updating and installing necessary packages..."
-sudo apt-get update
-sudo apt-get install -y git cmake build-essential raspberrypi-kernel-headers wireplumber pipewire pipewire-alsa pipewire-pulse jq python3-pip python3-venv
+#echo "Updating and installing necessary packages..."
+#sudo apt-get update
+#sudo apt-get install -y git cmake build-essential raspberrypi-kernel-headers wireplumber pipewire pipewire-alsa pipewire-pulse jq python3-pip python3-venv
 
 # Clone VocalFusionDriver Git repository
 echo "Cloning VocalFusionDriver Git repository..."
@@ -70,7 +70,7 @@ sudo curl -L -o /opt/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin "https://raw.gith
 sudo curl -L -o /opt/sj201/init_tas5806 "https://raw.githubusercontent.com/MycroftAI/mark-ii-hardware-testing/main/utils/init_tas5806.py"
 sudo chmod 0755 /opt/sj201/*
 
- Copy SJ201 systemd unit file
+echo Copy SJ201 systemd unit file
 echo "Copying SJ201 systemd unit file..."
 cat <<EOF | tee /home/ovos/.config/systemd/user/sj201.service > /dev/null
 [Unit]
@@ -94,9 +94,9 @@ EOF
 
 # Enable and start SJ201 systemd unit
 echo "Enabling SJ201 systemd unit..."
-sudo systemctl daemon-reload
-sudo systemctl enable sj201.service
-sudo systemctl start sj201.service
+systemctl --user daemon-reload
+systemctl --user enable sj201.service
+systemctl --user start sj201.service
 
 # Setup PipeWire
 echo "Setting up PipeWire..."
