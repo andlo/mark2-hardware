@@ -29,7 +29,7 @@ fi
 
 for DTBO_FILE in sj201 sj201-buttons-overlay sj201-rev10-pwm-fan-overlay; do
   sudo cp "$OVOS_HARDWARE_MARK2_VOCALFUSION_SRC_PATH/$DTBO_FILE$IS_RPI5.dtbo" "$BOOT_DIRECTORY/overlays/"
-  chmod 0755 "$BOOT_DIRECTORY/overlays/$DTBO_FILE$IS_RPI5.dtbo"
+  sudo chmod 0755 "$BOOT_DIRECTORY/overlays/$DTBO_FILE$IS_RPI5.dtbo"
 done
 
 # Manage overlays in /boot/config.txt
@@ -48,6 +48,7 @@ make -j "$ANSIBLE_PROCESSOR_COUNT" KDIR="/lib/modules/$ANSIBLE_KERNEL/build" all
 # Copy vocalfusion-soundcard.ko to /lib/modules
 echo "Copying vocalfusion-soundcard.ko to /lib/modules..."
 sudo cp "$OVOS_HARDWARE_MARK2_VOCALFUSION_SRC_PATH/driver/vocalfusion-soundcard.ko" "/lib/modules/$ANSIBLE_KERNEL/vocalfusion-soundcard.ko"
+chmod 0644 "/lib/modules/$ANSIBLE_KERNEL/vocalfusion-soundcard.ko"
 sudo depmod
 
 # Create /etc/modules-load.d/vocalfusion.conf file
