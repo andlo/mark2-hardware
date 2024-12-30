@@ -8,7 +8,7 @@ OVOS_HARDWARE_MARK2_VOCALFUSION_SRC_PATH="/home/$USER/VocalFusionDriver"
 OVOS_HARDWARE_MARK2_VOCALFUSION_BRANCH="main"
 BOOT_DIRECTORY="/boot"
 ANSIBLE_KERNEL=$(uname -r)
-ANSIBLE_PROCESSOR_COUNT=$(nproc.
+ANSIBLE_PROCESSOR_COUNT=$(nproc)
 VENV_PATH="/home/$USER/.venvs/sj201"
 
 # Update and install necessary packages
