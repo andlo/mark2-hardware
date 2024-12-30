@@ -13,8 +13,8 @@ VENV_PATH="/home/$USER/.venvs/sj201"
 
 # Update and install necessary packages
 #echo "Updating and installing necessary packages..."
-#sudo apt-get update
-#sudo apt-get install -y git cmake build-essential raspberrypi-kernel-headers wireplumber pipewire pipewire-alsa pipewire-pulse jq python3-pip python3-venv
+sudo apt-get update
+sudo apt-get install -y git cmake build-essential raspberrypi-kernel-headers jq 
 
 # Clone VocalFusionDriver Git repository
 echo "Cloning VocalFusionDriver Git repository..."
