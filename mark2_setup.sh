@@ -54,6 +54,7 @@ sudo depmod
 # Create /etc/modules-load.d/vocalfusion.conf file
 echo "Creating /etc/modules-load.d/vocalfusion.conf..."
 echo "vocalfusion-soundcard" | sudo tee /etc/modules-load.d/vocalfusion.conf > /dev/null
+sudo chmod 0644 /etc/modules-load.d/vocalfusion.conf
 
 # Create and activate Python virtual environment
 echo "Creating and activating Python virtual environment..."
