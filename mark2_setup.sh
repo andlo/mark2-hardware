@@ -65,6 +65,9 @@ source "$VENV_PATH/bin/activate"
 echo "Installing necessary Python packages in virtual environment..."
 pip install Adafruit-Blinka smbus2 RPi.GPIO gpiod
 
+# Update EEPROM
+sudo rpi-eeprom-update -a
+
 # Download SJ201 firmware and scripts
 echo "Downloading SJ201 firmware and scripts..."
 sudo mkdir -p /opt/sj201
