@@ -56,6 +56,11 @@ if [ "$KERNEL_VERSION" != "$LAST_KERNEL_VERSION" ]; then
         echo "dtoverlay=$DTO_OVERLAY$IS_RPI5" | sudo tee -a "$BOOT_DIRECTORY/firmware/config.txt"
     fi
     done
+    
+    # Create /etc/modules-load.d/vocalfusion.conf file
+    echo "Creating /etc/modules-load.d/vocalfusion.conf..."
+    echo "vocalfusion-soundcard" | sudo tee /etc/modules-load.d/vocalfusion.conf > /dev/null
+    sudo chmod 0644 /etc/modules-load.d/vocalfusion.conf
 
     # Update the last kernel version file
     echo "$KERNEL_VERSION" > "$LAST_KERNEL_VERSION_FILE"
