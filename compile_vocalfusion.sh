@@ -35,8 +35,8 @@ if [ "$KERNEL_VERSION" != "$LAST_KERNEL_VERSION" ]; then
     make -j$(nproc) KDIR="/lib/modules/$KERNEL_VERSION/build"
 
     # Copy the compiled module
-    sudo cp vocalfusion-soundcard.ko "/lib/modules/$KERNEL_VERSION/vocalfusion-soundcard.ko"
-    sudo depmod
+    cp vocalfusion-soundcard.ko "/lib/modules/$KERNEL_VERSION/vocalfusion-soundcard.ko"
+    depmod -a
 
     # Copy DTBO files to /boot/overlays
     echo "Copying DTBO files to /boot/overlays..."
@@ -46,27 +46,26 @@ if [ "$KERNEL_VERSION" != "$LAST_KERNEL_VERSION" ]; then
     fi
 
     for DTBO_FILE in sj201 sj201-buttons-overlay sj201-rev10-pwm-fan-overlay; do
-    sudo cp "$OVOS_HARDWARE_MARK2_VOCALFUSION_SRC_PATH/$DTBO_FILE$IS_RPI5.dtbo" "$BOOT_DIRECTORY/overlays/"
+    cp "$OVOS_HARDWARE_MARK2_VOCALFUSION_SRC_PATH/$DTBO_FILE$IS_RPI5.dtbo" "$BOOT_DIRECTORY/overlays/"
     done
 
     # Manage overlays in /boot/config.txt
     echo "Managing overlays in /boot/config.txt..."
     for DTO_OVERLAY in sj201 sj201-buttons-overlay sj201-rev10-pwm-fan-overlay; do
     if ! grep -q "^dtoverlay=$DTO_OVERLAY$IS_RPI5" "$BOOT_DIRECTORY/firmware/config.txt"; then
-        echo "dtoverlay=$DTO_OVERLAY$IS_RPI5" | sudo tee -a "$BOOT_DIRECTORY/firmware/config.txt"
+        echo "dtoverlay=$DTO_OVERLAY$IS_RPI5" | tee -a "$BOOT_DIRECTORY/firmware/config.txt"
     fi
     done
     
     # Create /etc/modules-load.d/vocalfusion.conf file
     echo "Creating /etc/modules-load.d/vocalfusion.conf..."
-    echo "vocalfusion-soundcard" | sudo tee /etc/modules-load.d/vocalfusion.conf > /dev/null
-    sudo chmod 0644 /etc/modules-load.d/vocalfusion.conf
+    echo "vocalfusion-soundcard" | tee /etc/modules-load.d/vocalfusion.conf > /dev/null
+    chmod 0644 /etc/modules-load.d/vocalfusion.conf
 
     # Update the last kernel version file
     echo "$KERNEL_VERSION" > "$LAST_KERNEL_VERSION_FILE"
 
     echo "VocalFusionDriver compiled successfully. Rebooting system..."
-    sudo reboot
 else
     echo "Kernel version has not changed. No need to compile."
 fi
