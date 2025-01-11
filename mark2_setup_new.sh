@@ -2,31 +2,19 @@
 
 set -e
 
-# Variables
-OVOS_HARDWARE_MARK2_VOCALFUSION_REPO_URL="https://github.com/OpenVoiceOS/VocalFusionDriver.git"
-OVOS_HARDWARE_MARK2_VOCALFUSION_SRC_PATH="/home/$USER/VocalFusionDriver"
-OVOS_HARDWARE_MARK2_VOCALFUSION_BRANCH="main"
-BOOT_DIRECTORY="/boot"
-ANSIBLE_KERNEL=$(uname -r)
-ANSIBLE_PROCESSOR_COUNT=$(nproc)
-VENV_PATH="/home/$USER/.venvs/sj201"
-
 # Update and install necessary packages
-#echo "Updating and installing necessary packages..."
+echo "Updating and installing necessary packages..."
 sudo apt-get update
-sudo apt-get install -y git cmake build-essential raspberrypi-kernel-headers jq 
-
+sudo apt-get install -y git cmake build-essential raspberrypi-kernel-headers jq python3-dev
 
 # Create and activate Python virtual environment
 echo "Creating and activating Python virtual environment..."
-python3 -m venv "$VENV_PATH"
-source "$VENV_PATH/bin/activate"
+sudo python3 -m venv "/opt/sj201"
+sudo source "/opt/sj201/bin/activate"
 
 # Install necessary Python packages in virtual environment
 echo "Installing necessary Python packages in virtual environment..."
 pip install Adafruit-Blinka smbus2 RPi.GPIO gpiod
-
-mkdir -p /home/$USER/.config/systemd/user
 
 # Update EEPROM
 sudo rpi-eeprom-update -a
@@ -41,7 +29,7 @@ sudo chmod 0755 /opt/sj201/*
 
 # Create SJ201 systemd unit file
 echo "Copying SJ201 systemd unit file..."
-cat <<EOF | tee /home/ovos/.config/systemd/user/sj201.service > /dev/null
+sudo cat <<EOF | tee /etc/systemd/system/sj201.service > /dev/null
 [Unit]
 Documentation=https://github.com/MycroftAI/mark-ii-hardware-testing/blob/main/README.md
 Description=SJ201 microphone initialization
@@ -60,17 +48,18 @@ RemainAfterExit=yes
 [Install]
 WantedBy=default.target
 EOF
+chmod 0644 /etc/systemd/system/sj201.service
 
 # Enable and start SJ201 systemd unit
 echo "Enabling SJ201 systemd unit..."
-systemctl --user daemon-reload
-systemctl --user enable sj201.service
+sudo systemctl daemon-reload
+sudo systemctl enable sj201.service
 #systemctl --user start sj201.service
 
 
 # Enable and start compile_vocalfussion systemd unit
 echo "Copying compile_vocalfusion systemd unit file..."
-cat <<EOF | tee /home/ovos/.config/systemd/user/compile_vocalfusion.service > /dev/null
+cat <<EOF | tee /etc/systemd/system/compile_vocalfusion.service > /dev/null
 [Unit]
 Description=Compile VocalFusionDriver if Kernel has Changed
 After=network.target
@@ -82,17 +71,15 @@ User=ovos
 [Install]
 WantedBy=multi-user.target
 EOF
+chmod 0644 /etc/systemd/system/compile_vocalfusion.service
 
 copy compile_vocalfusion.sh /opt/compile_vocalfusion.sh
 chmod +x /opt/compile_vocalfusion.sh
-
-cp compile_vocalfusion.service /home/$USER/.config/systemd/user/compile_vocalfusion.service
 
 echo "Enabling compile_vocalfussion systemd unit..."
 systemctl --user daemon-reload
 systemctl --user enable compile_vocalfusion.service
 #systemctl --user start compile_vocalfusion.service
-
 
 # Setup PipeWire
 echo "Setting up PipeWire..."
@@ -112,9 +99,6 @@ echo "Testing and configuring sound..."
 aplay -l
 arecord -l
 
-# Delete source path once compiled
-echo "Deleting source path once compiled..."
-sudo rm -rf "$OVOS_HARDWARE_MARK2_VOCALFUSION_SRC_PATH"
-
+# Finish
 echo "Setup for Mark II hardware on Raspbian Bookworm Lite with PipeWire completed."
 
