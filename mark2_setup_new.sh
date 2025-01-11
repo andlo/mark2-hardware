@@ -45,7 +45,7 @@ After=network-online.target
 Type=oneshot
 WorkingDirectory/opt/sj201
 ExecStartPre=/usr/bin/rpi-eeprom-update -a
-ExecStart=/usr/bin/-E env PATH=$PATH /opt/sj201/bin/python /opt/sj201/xvf3510-flash --direct /opt/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin --verbose
+ExecStart=/opt/sj201/bin/python /opt/sj201/xvf3510-flash --direct /opt/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin --verbose
 ExecStartPost=/opt/sj201/bin/python /opt/sj201/init_tas5806
 Restart=on-failure
 RestartSec=5s
