@@ -88,15 +88,15 @@ systemctl enable compile_vocalfusion.service
 #systemctl --user start compile_vocalfusion.service
 
 # Setup PipeWire
-echo "Setting up PipeWire..."
+#echo "Setting up PipeWire..."
 
-mkdir -p /home/$USER/.config/wireplumber/
-cp 50-alsa-config.lua /home/$USER/.config/wireplumber/50-alsa-config.lua
-chmod 0644 /home/$USER/.config/wireplumber/50-alsa-config.lua
+#mkdir -p /home/$USER/.config/wireplumber/
+#cp 50-alsa-config.lua /home/$USER/.config/wireplumber/50-alsa-config.lua
+#chmod 0644 /home/$USER/.config/wireplumber/50-alsa-config.lua
 
-systemctl --user enable wireplumber.service
-systemctl --user start wireplumber.service
-systemctl --user enable pipewire pipewire-pulse
+#systemctl --user enable wireplumber.service
+#systemctl --user start wireplumber.service
+#systemctl --user enable pipewire pipewire-pulse
 #systemctl --user start pipewire pipewire-pulse
 
 
@@ -106,5 +106,5 @@ aplay -l
 arecord -l
 
 # Finish
-echo "Setup for Mark II hardware on Raspbian Bookworm Lite with PipeWire completed."
+echo "Setup for Mark II hardware on Raspbian Bookworm Lite."
 
