@@ -48,7 +48,7 @@ RemainAfterExit=yes
 [Install]
 WantedBy=default.target
 EOF
-chmod 0644 /etc/systemd/system/sj201.service
+sudo chmod 0644 /etc/systemd/system/sj201.service
 
 # Enable and start SJ201 systemd unit
 echo "Enabling SJ201 systemd unit..."
@@ -59,7 +59,7 @@ sudo systemctl enable sj201.service
 
 # Enable and start compile_vocalfussion systemd unit
 echo "Copying compile_vocalfusion systemd unit file..."
-cat <<EOF | tee /etc/systemd/system/compile_vocalfusion.service > /dev/null
+sudo cat <<EOF | tee /etc/systemd/system/compile_vocalfusion.service > /dev/null
 [Unit]
 Description=Compile VocalFusionDriver if Kernel has Changed
 After=network.target
@@ -71,14 +71,14 @@ User=ovos
 [Install]
 WantedBy=multi-user.target
 EOF
-chmod 0644 /etc/systemd/system/compile_vocalfusion.service
+sudo chmod 0644 /etc/systemd/system/compile_vocalfusion.service
 
-copy compile_vocalfusion.sh /opt/compile_vocalfusion.sh
-chmod +x /opt/compile_vocalfusion.sh
+sudo cp compile_vocalfusion.sh /opt/compile_vocalfusion.sh
+sudo chmod +x /opt/compile_vocalfusion.sh
 
 echo "Enabling compile_vocalfussion systemd unit..."
-systemctl --user daemon-reload
-systemctl --user enable compile_vocalfusion.service
+sudo systemctl daemon-reload
+sudo systemctl enable compile_vocalfusion.service
 #systemctl --user start compile_vocalfusion.service
 
 # Setup PipeWire
