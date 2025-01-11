@@ -10,7 +10,7 @@ sudo apt-get install -y git cmake build-essential raspberrypi-kernel-headers jq 
 # Create and activate Python virtual environment
 echo "Creating and activating Python virtual environment..."
 sudo python3 -m venv "/opt/sj201"
-sudo source "/opt/sj201/bin/activate"
+source "/opt/sj201/bin/activate"
 
 # Install necessary Python packages in virtual environment
 echo "Installing necessary Python packages in virtual environment..."
