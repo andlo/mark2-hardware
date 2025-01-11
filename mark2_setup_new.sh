@@ -9,11 +9,12 @@ sudo apt-get install -y git cmake build-essential raspberrypi-kernel-headers jq 
 
 # Create and activate Python virtual environment
 echo "Creating and activating Python virtual environment..."
-sudo python3 -m venv "/opt/sj201"
+python3 -m venv "/opt/sj201"
 source "/opt/sj201/bin/activate"
 
 # Install necessary Python packages in virtual environment
 echo "Installing necessary Python packages in virtual environment..."
+pip install --upgrade pip
 pip install Adafruit-Blinka smbus2 RPi.GPIO gpiod
 
 # Update EEPROM
