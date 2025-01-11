@@ -7,6 +7,13 @@ echo "Updating and installing necessary packages..."
 apt-get update
 apt-get install -y git cmake build-essential raspberrypi-kernel-headers jq python3-dev
 
+# Enable I2C interface
+echo "Enabling I2C interface..."
+raspi-config nonint do_i2c 0
+
+# Update EEPROM
+rpi-eeprom-update -a
+
 # Create and activate Python virtual environment
 echo "Creating and activating Python virtual environment..."
 python3 -m venv "/opt/sj201"
@@ -17,8 +24,6 @@ echo "Installing necessary Python packages in virtual environment..."
 pip install --upgrade pip
 pip install Adafruit-Blinka smbus2 RPi.GPIO gpiod
 
-# Update EEPROM
-rpi-eeprom-update -a
 
 # Download SJ201 firmware and scripts
 echo "Downloading SJ201 firmware and scripts..."
