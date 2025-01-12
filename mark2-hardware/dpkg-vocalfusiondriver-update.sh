@@ -79,6 +79,7 @@ echo "Enabling I2C and SPI interfaces..."
 for DT_PARAM in i2s i2c_arm spi ; do
 if ! grep -q "^dtparam=$DT_PARAM=on" "$BOOT_DIRECTORY/firmware/config.txt"; then
     echo "dtparam=$DT_PARAM=on" | tee -a "$BOOT_DIRECTORY/firmware/config.txt"
+fi
 done
 
 
