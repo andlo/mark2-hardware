@@ -56,7 +56,7 @@ if [ "$KERNEL_VERSION" != "$LAST_KERNEL_VERSION" ]; then
     fi
 
     for DTBO_FILE in sj201 sj201-buttons-overlay sj201-rev10-pwm-fan-overlay; do
-    cp "$SRC_PATH/$DTBO_FILE$IS_RPI5.dtbo" "$BOOT_DIRECTORY/overlays/"
+    cp "$SRC_PATH/$DTBO_FILE$IS_RPI5.dtbo" "$BOOT_DIRECTORY/firmware/overlays/"
     done
 
     # Manage overlays in /boot/config.txt
