@@ -18,6 +18,17 @@ LAST_KERNEL_VERSION=$(cat "$LAST_KERNEL_VERSION_FILE")
 # Check if kernel version has changed
 if [ "$KERNEL_VERSION" != "$LAST_KERNEL_VERSION" ]; then
     echo "Kernel version has changed. Compiling VocalFusionDriver..."
+    # Update and install necessary packages
+    echo "Updating and installing necessary packages..."
+    apt-get update
+    apt-get install -y git cmake build-essential raspberrypi-kernel-headers jq python3-dev
+
+    # Enable I2C interface
+    echo "Enabling I2C interface..."
+    raspi-config nonint do_i2c 0
+
+    # Update EEPROM
+    rpi-eeprom-update -a
 
     # Clone the repository if it doesn't exist
     if [ ! -d "$SRC_PATH" ]; then
@@ -92,6 +103,25 @@ fi
 
 # update the eeprom 
 /usr/bin/rpi-eeprom-update -a
+
+# create and activate python virtual environment
+VENV_PATH="/opt/mark2-hardware/sj201"
+if [ ! -d "$VENV_PATH" ]; then
+    echo "Creating and activating Python virtual environment..."
+
+    mkdir -p /opt/mark2-hardware
+    mkdir -p /opt/mark2-hardware/sj201
+    chmod -R 0755 /opt/mark2-hardware
+    chmod 0755 /opt/mark2-hardware/sj201
+    python3 -m venv "$VENV_PATH"
+    source "$VENV_PATH/bin/activate"
+
+    echo "Installing necessary Python packages in virtual environment..."
+    pip install --upgrade pip
+    pip install Adafruit-Blinka smbus2 RPi.GPIO gpiod
+else
+    echo "Virtual environment already exists at $VENV_PATH"
+fi
 
 # Flash the xvf3510
 echo "Flashing xvf3510..."

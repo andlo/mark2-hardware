@@ -2,32 +2,6 @@
 
 set -e
 
-# Update and install necessary packages
-echo "Updating and installing necessary packages..."
-apt-get update
-apt-get install -y git cmake build-essential raspberrypi-kernel-headers jq python3-dev
-
-# Enable I2C interface
-echo "Enabling I2C interface..."
-raspi-config nonint do_i2c 0
-
-# Update EEPROM
-rpi-eeprom-update -a
-
-# Create and activate Python virtual environment
-echo "Creating and activating Python virtual environment..."
-mkdir -p /opt/mark2-hardware
-mkdir -p /opt/mark2-hardware/sj201
-chomon -R 0755 /opt/mark2-hardware
-chmod 0755 /opt/mark2-hardware/sj201
-python3 -m venv "/opt/mark2-hardware/sj201"
-source "/opt/mark2-hardware/sj201/bin/activate"
-
-# Install necessary Python packages in virtual environment
-echo "Installing necessary Python packages in virtual environment..."
-pip install --upgrade pip
-pip install Adafruit-Blinka smbus2 RPi.GPIO gpiod
-
 # Copying SJ201 firmware and scripts
 echo "Copying SJ201 firmware and scripts..."
 cp mark2-hardware/sj201/xvf3510-flash /opt/mark2-hardware/sj201/xvf3510-flash
@@ -53,4 +27,5 @@ arecord -l
 
 # Finish
 echo "Setup for Mark II hardware on Raspbian complete. Please reboot the system."
+echo "Rebooting can take a while first time as the drivers are being build and flashed."
 
