@@ -16,6 +16,7 @@ echo "Enabling I2C interface..."
 raspi-config nonint do_i2c 0
 
 # Update EEPROM
+echo "Updating EEPROM..."
 rpi-eeprom-update -a
 
 # Clone the repository if it doesn't exist
