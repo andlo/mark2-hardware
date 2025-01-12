@@ -14,6 +14,8 @@ chmod 0755 /opt/mark2-hardware/sj201/*
 # Enable mark2-hardware systemd unit
 echo "Copying mark2-hardware systemd unit file..."
 cp ./mark2-hardware/mark2-hardware.service /etc/systemd/system/mark2-hardware.service
+cp ./mark2-hardware/mark2-hardware.sh /opt/mark2-hardware/mark2-hardware.sh
+chmod 0755 /opt/mark2-hardware/mark2-hardware.sh
 chmod 0644 /etc/systemd/system/mark2-hardware.service
 
 # Enable mark2-hardware systemd unit
