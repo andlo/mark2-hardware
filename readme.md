@@ -4,7 +4,7 @@ Welcome to the Mark2 hardware Setup for Raspberry Pi OS. This document will help
 
 ## Installation
 
-To install hrdware drivers on Mark2, follow these steps:
+To install hardware drivers on Mark2, follow these steps:
 
 1. **Clone the Mark2 repository:**
     ```sh
@@ -19,9 +19,9 @@ To install hrdware drivers on Mark2, follow these steps:
 
 ## Usage
 
-This setupscript has installed a service mark2-hardware.service which runs on every boot and perorms these tasks:
-* If kernelversion has changed, it recompiled new drivers and install these
-* Flash the sj201    
+This setupscript install the VocalFusionDriver and enables what is needed and add a dpkg hook to automactly compile 
+the VocalFusionDriver when kernel is updated.
+It also adds a service mark2-sj201.service which runs on every boot and initialise the sj201 microphone
 
 ## License
 
