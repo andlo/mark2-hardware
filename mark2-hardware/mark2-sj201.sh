@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # create and activate python virtual environment
 VENV_PATH="/opt/mark2-hardware/sj201"
 ACTIVATE_PATH="$VENV_PATH/bin/activate"

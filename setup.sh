@@ -30,7 +30,7 @@ chmod 0644 /etc/systemd/system/mark2-sj201.service
 echo "Enabling mark2-sj201 systemd unit..."
 systemctl daemon-reload
 systemctl enable mark2-sj201.service
-systemctl --user start mark2-hardware.service
+systemctl start mark2-hardware.service
 
 # Finish
 echo "Setup for Mark II hardware on Raspbian complete. Please reboot the system."
