@@ -4,6 +4,8 @@ set -e
 
 # Copying SJ201 firmware and scripts
 echo "Copying SJ201 firmware and scripts..."
+mkdir -p /opt/mark2-hardware
+mkdir -p /opt/mark2-hardware/sj201
 cp ./mark2-hardware/sj201/xvf3510-flash.py /opt/mark2-hardware/sj201/xvf3510-flash.py
 cp ./mark2-hardware/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin /opt/mark2-hardware/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin
 cp ./mark2-hardware/sj201/init_tas5806.py /opt/mark2-hardware/sj201/init_tas5806.py
