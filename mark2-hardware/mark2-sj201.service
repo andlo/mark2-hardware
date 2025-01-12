@@ -1,0 +1,10 @@
+[Unit]
+Description=Setup and enable Mark2 hardware
+After=network.target
+
+[Service]
+ExecStart=/opt/mark2-hardware/mark2-sj201.sh
+User=root
+
+[Install]
+WantedBy=multi-user.target

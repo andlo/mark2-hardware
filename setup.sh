@@ -11,17 +11,22 @@ cp ./mark2-hardware/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin /opt/mark2-hardwar
 cp ./mark2-hardware/sj201/init_tas5806.py /opt/mark2-hardware/sj201/init_tas5806.py
 chmod 0755 /opt/mark2-hardware/sj201/*
 
-# Enable mark2-hardware systemd unit
-echo "Copying mark2-hardware systemd unit file..."
-cp ./mark2-hardware/mark2-hardware.service /etc/systemd/system/mark2-hardware.service
-cp ./mark2-hardware/mark2-hardware.sh /opt/mark2-hardware/mark2-hardware.sh
-chmod 0755 /opt/mark2-hardware/mark2-hardware.sh
-chmod 0644 /etc/systemd/system/mark2-hardware.service
+# Enable dpgk kernel update script
+echo "Enabling dpkg kernel update script..."
+cp ./mark2-hardware/dpkg-vocalfusiondriver-update.sh /etc/kernel/postinst.d/99-dpkg-vocalfusiondriver-update.sh
+chmod 0755 /etc/kernel/postinst.d/99-dpkg-vocalfusiondriver-update.sh
 
-# Enable mark2-hardware systemd unit
-echo "Enabling mark2-hardware systemd unit..."
+# Enable mark2-sj201 systemd unit
+echo "Copying mark2-sj201 systemd unit file..."
+cp ./mark2-hardware/mark2-sj201.service /etc/systemd/system/mark2-sj201.service
+cp ./mark2-hardware/mark2-sj201.sh /opt/mark2-hardware/mark2-sj201.sh
+chmod 0755 /opt/mark2-hardware/mark2-sj201.sh
+chmod 0644 /etc/systemd/system/mark2-sj201.service
+
+# Enable mark2-sj201 systemd unit
+echo "Enabling mark2-sj201 systemd unit..."
 systemctl daemon-reload
-systemctl enable mark2-hardware.service
+systemctl enable mark2-sj201.service
 #systemctl --user start mark2-hardware.service
 
 # Finish
