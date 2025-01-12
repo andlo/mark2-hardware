@@ -9,7 +9,7 @@ BOOT_DIRECTORY="/boot"
 # Update and install necessary packages
 echo "Updating and installing necessary packages..."
 apt-get update
-apt-get install -y git cmake build-essential raspberrypi-kernel-headers jq python3-dev python3-venv python3-pip i2c-tools
+apt-get install -y git cmake build-essential raspberrypi-kernel-headers jq 
 
 # Enable I2C interface
 echo "Enabling I2C interface..."
