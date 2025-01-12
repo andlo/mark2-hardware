@@ -106,15 +106,15 @@ fi
 
 # create and activate python virtual environment
 VENV_PATH="/opt/mark2-hardware/sj201"
-if [ ! -d "$VENV_PATH" ]; then
+ACTIVATE_PATH="$VENV_PATH/bin/activate"
+
+if [ ! -f "$ACTIVATE_PATH" ]; then
     echo "Creating and activating Python virtual environment..."
 
-    mkdir -p /opt/mark2-hardware
-    mkdir -p /opt/mark2-hardware/sj201
+    mkdir -p "$VENV_PATH"
     chmod -R 0755 /opt/mark2-hardware
-    chmod 0755 /opt/mark2-hardware/sj201
     python3 -m venv "$VENV_PATH"
-    source "$VENV_PATH/bin/activate"
+    source "$ACTIVATE_PATH"
 
     echo "Installing necessary Python packages in virtual environment..."
     pip install --upgrade pip
@@ -122,6 +122,8 @@ if [ ! -d "$VENV_PATH" ]; then
 else
     echo "Virtual environment already exists at $VENV_PATH"
 fi
+
+
 
 # Flash the xvf3510
 echo "Flashing xvf3510..."

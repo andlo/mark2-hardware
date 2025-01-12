@@ -3,7 +3,7 @@ Description=Setup and enable Mark2 hardware
 After=network.target
 
 [Service]
-ExecStart=/opt/mart2-hardware/mark2-hardware.sh
+ExecStart=/opt/mark2-hardware/mark2-hardware.sh
 User=root
 StandardOutput=journal 
 StandardError=journal
