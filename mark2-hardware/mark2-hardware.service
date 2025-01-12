@@ -1,9 +1,9 @@
 [Unit]
-Description=Compile VocalFusionDriver if Kernel has Changed
+Description=Setup and enable Mark2 hardware
 After=network.target
 
 [Service]
-ExecStart=/opt/mark2-hardware.sh
+ExecStart=/opt/mart2-hardware/mark2-hardware.sh
 User=root
 
 [Install]
