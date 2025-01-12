@@ -80,7 +80,3 @@ echo "Creating /etc/modules-load.d/vocalfusion.conf..."
 echo "vocalfusion-soundcard" | tee /etc/modules-load.d/vocalfusion.conf > /dev/null
 chmod 0644 /etc/modules-load.d/vocalfusion.conf
 
-# update the eeprom 
-/usr/bin/rpi-eeprom-update -a
-# enable the i2c interface
-/usr/bin/raspi-config nonint do_i2c 0
