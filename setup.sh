@@ -16,6 +16,9 @@ echo "Enabling dpkg kernel update script..."
 cp ./mark2-hardware/dpkg-vocalfusiondriver-update.sh /etc/kernel/postinst.d/99-dpkg-vocalfusiondriver-update.sh
 chmod 0755 /etc/kernel/postinst.d/99-dpkg-vocalfusiondriver-update.sh
 
+# run dpkg kernel update script
+/etc/kernel/postinst.d/99-dpkg-vocalfusiondriver-update.sh
+
 # Enable mark2-sj201 systemd unit
 echo "Copying mark2-sj201 systemd unit file..."
 cp ./mark2-hardware/mark2-sj201.service /etc/systemd/system/mark2-sj201.service
@@ -27,9 +30,8 @@ chmod 0644 /etc/systemd/system/mark2-sj201.service
 echo "Enabling mark2-sj201 systemd unit..."
 systemctl daemon-reload
 systemctl enable mark2-sj201.service
-#systemctl --user start mark2-hardware.service
+systemctl --user start mark2-hardware.service
 
 # Finish
 echo "Setup for Mark II hardware on Raspbian complete. Please reboot the system."
-echo "Rebooting can take a while first time as the drivers are being build and flashed."
-
+echo "After reboot, you can check the status of the mark2-sj201 service by running 'systemctl status mark2-sj201.service'."
