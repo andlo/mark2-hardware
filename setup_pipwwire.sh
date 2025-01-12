@@ -10,7 +10,7 @@
 echo "Setting up PipeWire..."
 
 mkdir -p /home/$USER/.config/wireplumber/
-cp 50-alsa-config.lua /home/$USER/.config/wireplumber/50-alsa-config.lua
+cp mark2-hardware/50-alsa-config.lua /home/$USER/.config/wireplumber/50-alsa-config.lua
 chmod 0644 /home/$USER/.config/wireplumber/50-alsa-config.lua
 
 if [ -f ~/.config/systemd/user/wireplumber.service ]; then

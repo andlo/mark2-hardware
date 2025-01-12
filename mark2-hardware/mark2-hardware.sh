@@ -2,9 +2,9 @@
 
 # Variables
 REPO_URL="https://github.com/OpenVoiceOS/VocalFusionDriver.git"
-SRC_PATH="/opt/VocalFusionDriver"
+SRC_PATH="/opt/mark2-hardware/VocalFusionDriver"
 KERNEL_VERSION=$(uname -r)
-LAST_KERNEL_VERSION_FILE="/opt/last_kernel_version"
+LAST_KERNEL_VERSION_FILE="/opt/mark2-hardware/last_kernel_version"
 
 # Create last kernel version file if it doesn't exist
 if [ ! -f "$LAST_KERNEL_VERSION_FILE" ]; then
@@ -74,5 +74,5 @@ fi
 
 # Flash the xvf3510
 echo "Flashing xvf3510..."
-/opt/sj201/bin/python /mark2-hardware/opt/sj201/xvf3510-flash --direct /opt/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin --verbose
-/opt/sj201/bin/python /mark2-hardware/opt/sj201/init_tas5806.py
+/opt/mark2-hardware/sj201/bin/python /opt/mark2hardware/sj201/xvf3510-flash --direct /opt/mark2-hardware/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin --verbose
+/opt/mark2-hardware/sj201/bin/python /opt/mark2-hardware/sj201/init_tas5806.py
