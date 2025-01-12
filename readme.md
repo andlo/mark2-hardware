@@ -17,6 +17,11 @@ To install hardware drivers on Mark2, follow these steps:
     sudo ./setup.sh
     ```
 
+3. **Reboot yuur system:**
+    ```sh
+    sudo reboot
+    ```
+
 ## Usage
 
 This setupscript install the VocalFusionDriver and enables what is needed and add a dpkg hook to automactly compile 
