@@ -121,13 +121,13 @@ if [ ! -f "$ACTIVATE_PATH" ]; then
     pip install Adafruit-Blinka smbus2 RPi.GPIO gpiod
 else
     echo "Virtual environment already exists at $VENV_PATH"
+    source "$ACTIVATE_PATH"
+
 fi
-
-
 
 # Flash the xvf3510
 echo "Flashing xvf3510..."
-/opt/mark2-hardware/sj201/bin/python /opt/mark2hardware/sj201/xvf3510-flash --direct /opt/mark2-hardware/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin --verbose
+/opt/mark2-hardware/sj201/bin/python /opt/mark2-hardware/sj201/xvf3510-flash.py --direct /opt/mark2-hardware/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin --verbose
 /opt/mark2-hardware/sj201/bin/python /opt/mark2-hardware/sj201/init_tas5806.py
 
 # Test and configure sound
