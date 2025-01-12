@@ -3,7 +3,7 @@
 # Variables
 REPO_URL="https://github.com/OpenVoiceOS/VocalFusionDriver.git"
 SRC_PATH="/opt/mark2-hardware/VocalFusionDriver"
-KERNEL_VERSION=$(uname -r)
+KERNEL_VERSION=$(ls /boot/vmlinuz-* | sort -V | tail -n 1 | sed 's|/boot/vmlinuz-||')
 BOOT_DIRECTORY="/boot"
 
 # Update and install necessary packages
