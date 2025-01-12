@@ -6,7 +6,7 @@ ACTIVATE_PATH="$VENV_PATH/bin/activate"
 
 if [ ! -f "$ACTIVATE_PATH" ]; then
     echo "Creating and activating Python virtual environment..."
-    apr-get update
+    apt-get update
     apt-get install -y python3-dev python3-venv python3-pip i2c-tools
     mkdir -p "$VENV_PATH"
     chmod -R 0755 /opt/mark2-hardware
