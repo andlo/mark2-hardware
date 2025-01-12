@@ -11,10 +11,6 @@ echo "Updating and installing necessary packages..."
 apt-get update
 apt-get install -y git cmake build-essential raspberrypi-kernel-headers jq 
 
-# Enable I2C interface
-echo "Enabling I2C interface..."
-raspi-config nonint do_i2c 0
-
 # Update EEPROM
 echo "Updating EEPROM..."
 rpi-eeprom-update -a
@@ -78,9 +74,9 @@ else
     echo "'attiny1614' not detected, no changes made."
 fi
 
-# Enable I2S and SPI interfaces
-echo "Enabling I2S and SPI interfaces..."
-for DT_PARAM in i2s spi ; do
+# Enable I2S I2C and SPI interfaces
+echo "Enabling I2C and SPI interfaces..."
+for DT_PARAM in i2s i2c_arm spi ; do
 if ! grep -q "^dtparam=$DT_PARAM=on" "$BOOT_DIRECTORY/firmware/config.txt"; then
     echo "tparam=$DT_PARAM=on" | tee -a "$BOOT_DIRECTORY/firmware/config.txt"
 fi
