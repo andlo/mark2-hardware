@@ -5,6 +5,7 @@ REPO_URL="https://github.com/OpenVoiceOS/VocalFusionDriver.git"
 SRC_PATH="/opt/mark2-hardware/VocalFusionDriver"
 KERNEL_VERSION=$(uname -r)
 LAST_KERNEL_VERSION_FILE="/opt/mark2-hardware/last_kernel_version"
+BOOT_DIRECTORY="/boot"
 
 # Create last kernel version file if it doesn't exist
 if [ ! -f "$LAST_KERNEL_VERSION_FILE" ]; then
@@ -54,7 +55,27 @@ if [ "$KERNEL_VERSION" != "$LAST_KERNEL_VERSION" ]; then
         echo "dtoverlay=$DTO_OVERLAY$IS_RPI5" | tee -a "$BOOT_DIRECTORY/firmware/config.txt"
     fi
     done
-    
+
+    BACKLIGHT_OVERLAY="dtoverlay=rpi-backlight"
+    KMS_OVERLAY="dtoverlay=vc4-kms-v3d"
+    FKMS_OVERLAY="dtoverlay=vc4-fkms-v3d"
+    if grep -q "^$BACKLIGHT_OVERLAY" "$BOOT_DIRECTORY/firmware/config.txt"; then
+        echo "$BACKLIGHT_OVERLAY is already present."
+    else
+        echo "$BACKLIGHT_OVERLAY" | sudo tee -a "$BOOT_DIRECTORY/firmware/config.txt"
+    fi
+
+    echo "Managing touchscreen, DevKit vs Mark II..."
+    if [[ $(i2cdetect -y 1) == *attiny1614* ]]; then
+        echo "Detected 'attiny1614', configuring overlays..."
+        sudo sed -i "/^$KMS_OVERLAY/d" "$BOOT_DIRECTORY/firmware/config.txt"  # Remove KMS overlay
+        if ! grep -q "^$FKMS_OVERLAY" "$BOOT_DIRECTORY/firmware/config.txt"; then
+            echo "$FKMS_OVERLAY" | sudo tee -a "$BOOT_DIRECTORY/firmware/config.txt"  # Add FKMS overlay
+        fi
+    else
+        echo "'attiny1614' not detected, no changes made."
+    fi
+
     # Create /etc/modules-load.d/vocalfusion.conf file
     echo "Creating /etc/modules-load.d/vocalfusion.conf..."
     echo "vocalfusion-soundcard" | tee /etc/modules-load.d/vocalfusion.conf > /dev/null

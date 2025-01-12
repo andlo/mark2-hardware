@@ -9,7 +9,7 @@ To install hrdware drivers on Mark2, follow these steps:
 1. **Clone the Mark2 repository:**
     ```sh
     git clone https://github.com/andlo/mark2-hardware.git
-    cd mark2
+    cd mark2-hardware
     ```
 
 2. **Run the setup script:**
