@@ -9,7 +9,7 @@ BOOT_DIRECTORY="/boot"
 # Update and install necessary packages
 echo "Updating and installing necessary packages..."
 apt-get update
-apt-get install -y git cmake build-essential raspberrypi-kernel-headers jq 
+apt-get install -y git cmake build-essential raspberrypi-kernel-headers jq i2c-tools
 
 # Update EEPROM
 echo "Updating EEPROM..."
