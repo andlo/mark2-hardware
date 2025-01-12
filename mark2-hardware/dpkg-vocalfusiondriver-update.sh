@@ -56,6 +56,7 @@ if ! grep -q "^dtoverlay=$DTO_OVERLAY$IS_RPI5" "$BOOT_DIRECTORY/firmware/config.
 fi
 done
 
+# Manage backlight overlay
 BACKLIGHT_OVERLAY="dtoverlay=rpi-backlight"
 KMS_OVERLAY="dtoverlay=vc4-kms-v3d"
 FKMS_OVERLAY="dtoverlay=vc4-fkms-v3d"
@@ -65,12 +66,7 @@ else
     echo "$BACKLIGHT_OVERLAY" | sudo tee -a "$BOOT_DIRECTORY/firmware/config.txt"
 fi
 
-for DT_PARAM in i2s spi ; do
-if ! grep -q "^dtparam=$DT_PARAM=on" "$BOOT_DIRECTORY/firmware/config.txt"; then
-    echo "tparam=$DT_PARAM=on" | tee -a "$BOOT_DIRECTORY/firmware/config.txt"
-fi
-done
-
+# Manage touchscreen, DevKit vs Mark II
 echo "Managing touchscreen, DevKit vs Mark II..."
 if [[ $(i2cdetect -y 1) == *attiny1614* ]]; then
     echo "Detected 'attiny1614', configuring overlays..."
@@ -81,6 +77,15 @@ if [[ $(i2cdetect -y 1) == *attiny1614* ]]; then
 else
     echo "'attiny1614' not detected, no changes made."
 fi
+
+# Enable I2S and SPI interfaces
+echo "Enabling I2S and SPI interfaces..."
+for DT_PARAM in i2s spi ; do
+if ! grep -q "^dtparam=$DT_PARAM=on" "$BOOT_DIRECTORY/firmware/config.txt"; then
+    echo "tparam=$DT_PARAM=on" | tee -a "$BOOT_DIRECTORY/firmware/config.txt"
+fi
+done
+
 
 # Create /etc/modules-load.d/vocalfusion.conf file
 echo "Creating /etc/modules-load.d/vocalfusion.conf..."
