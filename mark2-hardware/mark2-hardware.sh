@@ -98,7 +98,7 @@ if [ "$KERNEL_VERSION" != "$LAST_KERNEL_VERSION" ]; then
     echo "VocalFusionDriver compiled successfully. Rebooting system..."
     reboot
 else
-    echo "Kernel version has not changed. No need to compile."
+    echo "Kernel version has not changed. No need to compile VocalFusionDriver."
 fi
 
 # update the eeprom 
