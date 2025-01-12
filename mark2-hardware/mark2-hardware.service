@@ -5,6 +5,8 @@ After=network.target
 [Service]
 ExecStart=/opt/mart2-hardware/mark2-hardware.sh
 User=root
+StandardOutput=journal 
+StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
