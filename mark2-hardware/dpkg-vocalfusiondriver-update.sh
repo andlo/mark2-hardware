@@ -63,16 +63,16 @@ FKMS_OVERLAY="dtoverlay=vc4-fkms-v3d"
 if grep -q "^$BACKLIGHT_OVERLAY" "$BOOT_DIRECTORY/firmware/config.txt"; then
     echo "$BACKLIGHT_OVERLAY is already present."
 else
-    echo "$BACKLIGHT_OVERLAY" | sudo tee -a "$BOOT_DIRECTORY/firmware/config.txt"
+    echo "$BACKLIGHT_OVERLAY" | tee -a "$BOOT_DIRECTORY/firmware/config.txt"
 fi
 
 # Manage touchscreen, DevKit vs Mark II
 echo "Managing touchscreen, DevKit vs Mark II..."
 if [[ $(i2cdetect -y 1) == *attiny1614* ]]; then
     echo "Detected 'attiny1614', configuring overlays..."
-    sudo sed -i "/^$KMS_OVERLAY/d" "$BOOT_DIRECTORY/firmware/config.txt"  # Remove KMS overlay
+    sed -i "/^$KMS_OVERLAY/d" "$BOOT_DIRECTORY/firmware/config.txt"  # Remove KMS overlay
     if ! grep -q "^$FKMS_OVERLAY" "$BOOT_DIRECTORY/firmware/config.txt"; then
-        echo "$FKMS_OVERLAY" | sudo tee -a "$BOOT_DIRECTORY/firmware/config.txt"  # Add FKMS overlay
+        echo "$FKMS_OVERLAY" | tee -a "$BOOT_DIRECTORY/firmware/config.txt"  # Add FKMS overlay
     fi
 else
     echo "'attiny1614' not detected, no changes made."
