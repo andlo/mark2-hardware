@@ -1,9 +1,7 @@
 #!/bin/bash
 
-
 # Variables
 REPO_URL="https://github.com/OpenVoiceOS/VocalFusionDriver.git"
-#SRC_PATH="/home/$USER/VocalFusionDriver"
 SRC_PATH="/opt/VocalFusionDriver"
 KERNEL_VERSION=$(uname -r)
 LAST_KERNEL_VERSION_FILE="/opt/last_kernel_version"
@@ -66,6 +64,15 @@ if [ "$KERNEL_VERSION" != "$LAST_KERNEL_VERSION" ]; then
     echo "$KERNEL_VERSION" > "$LAST_KERNEL_VERSION_FILE"
 
     echo "VocalFusionDriver compiled successfully. Rebooting system..."
+    reboot
 else
     echo "Kernel version has not changed. No need to compile."
 fi
+
+# update the eeprom 
+/usr/bin/rpi-eeprom-update -a
+
+# Flash the xvf3510
+echo "Flashing xvf3510..."
+/opt/sj201/bin/python /mark2-hardware/opt/sj201/xvf3510-flash --direct /opt/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin --verbose
+/opt/sj201/bin/python /mark2-hardware/opt/sj201/init_tas5806.py

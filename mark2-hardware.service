@@ -3,8 +3,8 @@ Description=Compile VocalFusionDriver if Kernel has Changed
 After=network.target
 
 [Service]
-ExecStart=/opt/compile_vocalfusion.sh
-User=ovos
+ExecStart=/opt/mark2-hardware.sh
+User=root
 
 [Install]
 WantedBy=multi-user.target
