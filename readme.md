@@ -1,14 +1,14 @@
-# Mark2 Setup
+# Mark2 hardware setup for Raspberry Pi OS 
 
-Welcome to the Mark2 hardware Setup. This document will help you get started with setting up Mark2 hardware on your system.
+Welcome to the Mark2 hardware Setup for Raspberry Pi OS. This document will help you get started with setting up Mark2 hardware on your Raspberry Pi OS.
 
 ## Installation
 
-To install drivers on Mark2 , follow these steps:
+To install hrdware drivers on Mark2, follow these steps:
 
 1. **Clone the Mark2 repository:**
     ```sh
-    git clone https://github.com/andlo/mark2.git
+    git clone https://github.com/andlo/mark2-hardware.git
     cd mark2
     ```
 
@@ -29,6 +29,6 @@ missing at the moment
 
 ## Contact
 
-If you have any questions or need further assistance, please open an issue on the [GitHub repository](https://github.com/andlo/mark2/issues).
+If you have any questions or need further assistance, please open an issue on the [GitHub repository](https://github.com/andlo/mark2-hardware/issues).
 
 
