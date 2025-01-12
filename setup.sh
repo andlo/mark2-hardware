@@ -7,6 +7,7 @@ echo "Enabling dpkg kernel update script..."
 cp ./mark2-hardware/dpkg-vocalfusiondriver-update.sh /etc/kernel/postinst.d/99-dpkg-vocalfusiondriver-update.sh
 chmod 0755 /etc/kernel/postinst.d/99-dpkg-vocalfusiondriver-update.sh
 
+
 # run dpkg kernel update script
 /etc/kernel/postinst.d/99-dpkg-vocalfusiondriver-update.sh
 
