@@ -5,8 +5,9 @@ After=network.target
 [Service]
 ExecStart=/opt/mark2-hardware/mark2-hardware.sh
 User=root
-StandardOutput=journal 
-StandardError=journal
+StandardOutput=tty 
+StandardError=tty
+TTYPath=/dev/console
 
 [Install]
 WantedBy=multi-user.target
