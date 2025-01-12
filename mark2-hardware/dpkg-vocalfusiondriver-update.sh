@@ -65,8 +65,11 @@ else
     echo "$BACKLIGHT_OVERLAY" | sudo tee -a "$BOOT_DIRECTORY/firmware/config.txt"
 fi
 
-echo "dtparam=i2s=on" | sudo tee -a "$BOOT_DIRECTORY/firmware/config.txt"
-echo "dtparam=spi=on" | sudo tee -a "$BOOT_DIRECTORY/firmware/config.txt"
+for DT_PARAM in i2s spi ; do
+if ! grep -q "^dtparam=$DT_PARAM=on" "$BOOT_DIRECTORY/firmware/config.txt"; then
+    echo "tparam=$DT_PARAM=on" | tee -a "$BOOT_DIRECTORY/firmware/config.txt"
+fi
+done
 
 echo "Managing touchscreen, DevKit vs Mark II..."
 if [[ $(i2cdetect -y 1) == *attiny1614* ]]; then
