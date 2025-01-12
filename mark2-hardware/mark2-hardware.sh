@@ -127,3 +127,8 @@ fi
 echo "Flashing xvf3510..."
 /opt/mark2-hardware/sj201/bin/python /opt/mark2hardware/sj201/xvf3510-flash --direct /opt/mark2-hardware/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin --verbose
 /opt/mark2-hardware/sj201/bin/python /opt/mark2-hardware/sj201/init_tas5806.py
+
+# Test and configure sound
+echo "Testing and configuring sound..."
+aplay -l
+arecord -l

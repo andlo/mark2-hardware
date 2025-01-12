@@ -20,11 +20,6 @@ systemctl daemon-reload
 systemctl enable mark2-hardware.service
 #systemctl --user start mark2-hardware.service
 
-# Test and configure sound
-echo "Testing and configuring sound..."
-aplay -l
-arecord -l
-
 # Finish
 echo "Setup for Mark II hardware on Raspbian complete. Please reboot the system."
 echo "Rebooting can take a while first time as the drivers are being build and flashed."
