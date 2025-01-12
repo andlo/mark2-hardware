@@ -4,14 +4,14 @@ set -e
 
 # Copying SJ201 firmware and scripts
 echo "Copying SJ201 firmware and scripts..."
-cp mark2-hardware/sj201/xvf3510-flash /opt/mark2-hardware/sj201/xvf3510-flash
-cp mark2-hardware/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin /opt/mark2-hardware/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin
-cp mark2-hardware/sj201/init_tas5806.py /opt/mark2-hardware/sj201/init_tas5806.py
+cp ./mark2-hardware/sj201/xvf3510-flash /opt/mark2-hardware/sj201/xvf3510-flash
+cp ./mark2-hardware/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin /opt/mark2-hardware/sj201/app_xvf3510_int_spi_boot_v4_2_0.bin
+cp ./mark2-hardware/sj201/init_tas5806.py /opt/mark2-hardware/sj201/init_tas5806.py
 chmod 0755 /opt/mark2-hardware/sj201/*
 
 # Enable mark2-hardware systemd unit
 echo "Copying mark2-hardware systemd unit file..."
-cp mark2-hardware/mark2-hardware.service /etc/systemd/system/mark2-hardware.service
+cp ./mark2-hardware/mark2-hardware.service /etc/systemd/system/mark2-hardware.service
 chmod 0644 /etc/systemd/system/mark2-hardware.service
 
 # Enable mark2-hardware systemd unit
