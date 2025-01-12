@@ -82,6 +82,9 @@ if ! grep -q "^dtparam=$DT_PARAM=on" "$BOOT_DIRECTORY/firmware/config.txt"; then
 fi
 done
 
+raspi-config nonint do_spi 0
+aspi-config nonint do_i2c 0
+
 
 # Create /etc/modules-load.d/vocalfusion.conf file
 echo "Creating /etc/modules-load.d/vocalfusion.conf..."
